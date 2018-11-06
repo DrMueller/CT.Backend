@@ -6,6 +6,7 @@ queue:
   name: Hosted VS2017
 variables:
   BuildConfiguration: 'Release'
+  BuildRepositoryNameLower: ''
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet Packages'
@@ -51,6 +52,16 @@ steps:
     modifyOutputPath: false
 
 
+- task: YodLabs.VariableTasks.SetVariable.SetVariable@0
+  displayName: 'Set Variable BuildRepositoryNameLower to $(Build.Repository.Name) with toLowerCase applied'
+  inputs:
+    variableName: BuildRepositoryNameLower
+
+    value: '$(Build.Repository.Name)'
+
+    transform: toLowerCase
+
+
 - task: Docker@1
   displayName: 'Build Docker Image'
   inputs:
@@ -58,7 +69,7 @@ steps:
 
     dockerRegistryEndpoint: DockerHub
 
-    imageName: '$(Build.Repository.Name):$(Build.BuildNumber)'
+    imageName: '$(BuildRepositoryNameLower):$(Build.BuildNumber)'
 
     includeLatestTag: true
 
@@ -72,14 +83,14 @@ steps:
 
     command: 'Push an image'
 
-    imageName: '$(Build.Repository.Name):$(Build.BuildNumber)'
+    imageName: '$(BuildRepositoryNameLower):$(Build.BuildNumber)'
 
 - task: powershell@2
   displayName: 'Update DockerStack'
   inputs:
     targetType: filePath
     filePath: './Scripts/Update-Dockerstack.ps1' 
-    arguments: '-repositoryLocalPath $(Build.Repository.LocalPath) -imageName $(Build.Repository.Name):$(Build.BuildNumber)'
+    arguments: '-repositoryLocalPath $(Build.Repository.LocalPath) -imageName $(BuildRepositoryNameLower):$(Build.BuildNumber)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish DockerStack'
