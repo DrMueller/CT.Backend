@@ -62,14 +62,17 @@ steps:
     transform: toLowerCase
 
 
-- task: Docker@1
-  displayName: 'Build Docker Image'
+
+- task: Docker@0
+  displayName: 'Push an image'
   inputs:
     containerregistrytype: 'Container Registry'
 
-    dockerRegistryEndpoint: DockerHub
+    dockerRegistryConnection: DockerHub
 
-    imageName: '$(BuildRepositoryNameLower):$(Build.BuildNumber)'
+    imageName: '$(Build.Repository.Name)'
+
+    additionalImageTags: '$(Build.BuildNumber)'
 
     includeLatestTag: true
 
