@@ -62,7 +62,6 @@ steps:
     transform: toLowerCase
 
 
-steps:
 - task: Docker@0
   displayName: 'Push an image'
   inputs:
