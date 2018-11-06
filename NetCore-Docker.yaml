@@ -62,13 +62,15 @@ steps:
     transform: toLowerCase
 
 
-
+steps:
 - task: Docker@0
   displayName: 'Push an image'
   inputs:
     containerregistrytype: 'Container Registry'
 
     dockerRegistryConnection: DockerHub
+
+    action: 'Push an image'
 
     imageName: '$(Build.Repository.Name)'
 
