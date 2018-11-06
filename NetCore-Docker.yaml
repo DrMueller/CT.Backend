@@ -56,7 +56,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
 
-    dockerRegistryEndpoint: 'DockerHub-DrMueller'
+    dockerRegistryEndpoint: DockerHub
 
     imageName: '$(Build.Repository.Name):$(Build.BuildNumber)'
 
@@ -68,7 +68,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
 
-    dockerRegistryEndpoint: 'DockerHub-DrMueller'
+    dockerRegistryEndpoint: 'DockerHub'
 
     command: 'Push an image'
 
