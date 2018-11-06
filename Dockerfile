@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
+FROM microsoft/aspnetcore:2.0
 WORKDIR /app
 COPY ./DockerContent .
 EXPOSE 80
