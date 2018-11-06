@@ -74,11 +74,12 @@ steps:
 
     imageName: '$(Build.Repository.Name):$(Build.BuildNumber)'
 
-
-- powershell: ./ 'Scripts/Update-Dockerstack.ps1' 
-  arguments: '-repositoryLocalPath $(Build.Repository.LocalPath) -imageName $(Build.Repository.Name):$(Build.BuildNumber)'
-
+- task: powershell@2
   displayName: 'Update DockerStack'
+  inputs:
+    targetType: filePath
+    filePath: './Scripts/Update-Dockerstack.ps1' 
+    arguments: '-repositoryLocalPath $(Build.Repository.LocalPath) -imageName $(Build.Repository.Name):$(Build.BuildNumber)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish DockerStack'
