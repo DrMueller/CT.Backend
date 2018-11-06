@@ -74,17 +74,6 @@ steps:
     includeLatestTag: true
 
 
-- task: Docker@1
-  displayName: 'Push Docker Image'
-  inputs:
-    containerregistrytype: 'Container Registry'
-
-    dockerRegistryEndpoint: 'DockerHub'
-
-    command: 'Push an image'
-
-    imageName: '$(BuildRepositoryNameLower):$(Build.BuildNumber)'
-
 - task: powershell@2
   displayName: 'Update DockerStack'
   inputs:
