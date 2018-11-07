@@ -1,7 +1,7 @@
 ﻿version: "3"
 
 services:
-  ngseed-backend:
+  ct-backend:
     image: __ImageName__
     environment:
       - ASPNETCORE_ENVIRONMENT=local
