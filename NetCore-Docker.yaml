@@ -53,13 +53,27 @@ steps:
 
 
 - task: YodLabs.VariableTasks.SetVariable.SetVariable@0
-  displayName: 'Set Variable BuildRepositoryNameLower to $(Build.Repository.Name) with toLowerCase applied'
+  displayName: 'Set Variable ImageName to $(Build.Repository.Name) with toLowerCase applied'
   inputs:
-    variableName: BuildRepositoryNameLower
+    variableName: ImageName
 
     value: '$(Build.Repository.Name)'
 
     transform: toLowerCase
+
+
+- task: YodLabs.VariableTasks.SetVariable.SetVariable@0
+  displayName: 'Set Variable ImageName to $(ImageName) with replace applied'
+  inputs:
+    variableName: ImageName
+
+    value: '$(ImageName)'
+
+    transform: replace
+
+    searchValue: '\.'
+
+    newValue: '-'
 
 
 - task: Docker@0
@@ -69,7 +83,7 @@ steps:
 
     dockerRegistryConnection: DockerHub
 
-    imageName: '$(Build.Repository.Name)'
+    imageName: '$(ImageName)'
 
     additionalImageTags: '$(Build.BuildNumber)'
 
@@ -85,7 +99,7 @@ steps:
 
     action: 'Push an image'
 
-    imageName: '$(Build.Repository.Name)'
+    imageName: '$(ImageName)'
 
     additionalImageTags: '$(Build.BuildNumber)'
 
@@ -97,7 +111,7 @@ steps:
   inputs:
     targetType: filePath
     filePath: './Scripts/Update-Dockerstack.ps1' 
-    arguments: '-repositoryLocalPath $(Build.Repository.LocalPath) -imageName $(BuildRepositoryNameLower):$(Build.BuildNumber)'
+    arguments: '-repositoryLocalPath $(Build.Repository.LocalPath) -imageName $(ImageName):$(Build.BuildNumber)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish DockerStack'
