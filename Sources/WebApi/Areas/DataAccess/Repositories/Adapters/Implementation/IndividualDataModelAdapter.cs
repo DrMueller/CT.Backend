@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Mmu.Ct.Backend.WebApi.Areas.DataAccess.DataModels;
+using Mmu.Ct.Backend.WebApi.Areas.DataAccess.DataModeling;
 using Mmu.Ct.Backend.WebApi.Areas.Domain.Factories;
 using Mmu.Ct.Backend.WebApi.Areas.Domain.Models;
 using Mmu.Mlh.DataAccess.Areas.DataModeling.Services.Implementation;

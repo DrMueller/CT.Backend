@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Mmu.Ct.Backend.WebApi.Areas.Domain.Models;
 
-namespace Mmu.Ct.Backend.WebApi.Areas.DataAccess.DataModels.Profiles
+namespace Mmu.Ct.Backend.WebApi.Areas.DataAccess.DataModeling.Profiles
 {
     public class IndividualDataModelProfile : Profile
     {

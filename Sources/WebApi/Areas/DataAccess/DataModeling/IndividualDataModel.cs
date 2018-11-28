@@ -1,7 +1,7 @@
 ﻿using System;
 using Mmu.Mlh.DataAccess.Areas.DataModeling.Models;
 
-namespace Mmu.Ct.Backend.WebApi.Areas.DataAccess.DataModels
+namespace Mmu.Ct.Backend.WebApi.Areas.DataAccess.DataModeling
 {
     public class IndividualDataModel : DataModelBase<string>
     {
