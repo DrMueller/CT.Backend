@@ -8,13 +8,8 @@ namespace Mmu.Ct.Backend.WebApi.Areas.DataAccess.Repositories.Implementation
 {
     public class IndividualRepository : RepositoryBase<Individual, IndividualDataModel, string>
     {
-        private readonly IDataModelAdapter<IndividualDataModel, Individual, string> _dataModelAdapter;
-        private readonly IDataModelRepository<IndividualDataModel, string> _dataModelRepository;
-
         public IndividualRepository(IDataModelRepository<IndividualDataModel, string> dataModelRepository, IDataModelAdapter<IndividualDataModel, Individual, string> dataModelAdapter) : base(dataModelRepository, dataModelAdapter)
         {
-            _dataModelRepository = dataModelRepository;
-            _dataModelAdapter = dataModelAdapter;
         }
     }
 }
