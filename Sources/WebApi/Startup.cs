@@ -9,6 +9,7 @@ using Mmu.Mlh.WebApiExtensions.Areas.Initialization.AppInitialization.Models;
 using Mmu.Mlh.WebApiExtensions.Areas.Initialization.AppInitialization.Services;
 using Mmu.Mlh.WebApiExtensions.Areas.Initialization.ServiceInitialization.Models;
 using Mmu.Mlh.WebApiExtensions.Areas.Initialization.ServiceInitialization.Services;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Mmu.Ct.Backend.WebApi
 {
@@ -28,6 +29,13 @@ namespace Mmu.Ct.Backend.WebApi
 
         public static void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(
+                c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Container Testing API V1");
+                });
+
             var config = new AppConfig(app, env, loggerFactory);
             AppInitializationService.InitializeApplication(config);
         }
@@ -35,6 +43,13 @@ namespace Mmu.Ct.Backend.WebApi
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var serviceConfig = new ServiceConfig(services, Configuration, typeof(Startup).Assembly);
+
+            services.AddSwaggerGen(
+                c =>
+                {
+                    c.SwaggerDoc("v1", new Info { Title = "Container Testing API", Version = "v1" });
+                });
+
             return ServiceInitializationService.InitializeServices<WebSettings>(serviceConfig);
         }
     }
